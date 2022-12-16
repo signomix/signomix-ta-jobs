@@ -1,4 +1,4 @@
-package com.signomix.jobs;
+package com.signomix.jobs.adapter.in;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.enterprise.context.ApplicationScoped;
