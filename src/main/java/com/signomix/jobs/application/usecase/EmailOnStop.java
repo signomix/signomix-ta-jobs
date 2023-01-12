@@ -14,9 +14,10 @@ public class EmailOnStop {
     MessageService messageService;
     
     public void run(){
-        System.out.println("e-mail on start");
+        System.out.println("e-mail on stop");
         MessageEnvelope envelope = new MessageEnvelope();
         User user = new User();
+        user.role="admin";
         envelope.user=user;
         envelope.subject="service is going down";
         messageService.sendAdminEmail(envelope);

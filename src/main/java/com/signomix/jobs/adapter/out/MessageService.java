@@ -29,9 +29,6 @@ public class MessageService {
     @Channel("admin_email")
     Emitter<byte[]> adminEmailEmitter;
 
-    public void onApplicationStart(@Observes StartupEvent event) {
-    }
-
     public void sendEvent(EventEnvelope wrapper) {
         LOG.info("sending event to MQ");
         String encodedMessage;
@@ -50,7 +47,7 @@ public class MessageService {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             encodedMessage = objectMapper.writeValueAsString(wrapper);
-            eventEmitter.send(encodedMessage.getBytes());
+            adminEmailEmitter.send(encodedMessage.getBytes());
         } catch (JsonProcessingException ex) {
             LOG.error(ex.getMessage());
         }

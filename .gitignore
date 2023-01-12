@@ -38,3 +38,6 @@ nb-configuration.xml
 
 # Local environment
 .env
+attic/common/EventEnvelope.java
+attic/common/MessageEnvelope.java
+attic/common/User.java
