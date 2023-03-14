@@ -23,6 +23,12 @@ public class MessageService {
     @Channel("events")
     Emitter<byte[]> eventEmitter;
 
+    @Channel("events_db")
+    Emitter<byte[]> eventDbEmitter;
+
+    @Channel("events_device")
+    Emitter<byte[]> eventDeviceEmitter;
+
     @Channel("notifications")
     Emitter<byte[]> iotEventEmitter;
 
@@ -30,12 +36,24 @@ public class MessageService {
     Emitter<byte[]> adminEmailEmitter;
 
     public void sendEvent(EventEnvelope wrapper) {
-        LOG.info("sending event to MQ");
+        LOG.info("sending event to MQ with payload "+wrapper.payload);
         String encodedMessage;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             encodedMessage = objectMapper.writeValueAsString(wrapper);
             eventEmitter.send(encodedMessage.getBytes());
+        } catch (JsonProcessingException ex) {
+            LOG.error(ex.getMessage());
+        }
+    }
+
+    public void sendDbEvent(EventEnvelope wrapper) {
+        String encodedMessage;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            LOG.info("eventDbEmitter with payload "+wrapper.payload);
+            encodedMessage = objectMapper.writeValueAsString(wrapper);
+            eventDbEmitter.send(encodedMessage.getBytes());
         } catch (JsonProcessingException ex) {
             LOG.error(ex.getMessage());
         }

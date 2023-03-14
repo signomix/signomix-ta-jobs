@@ -16,6 +16,6 @@ public class BackupRunner {
         EventEnvelope event=new EventEnvelope();
         event.type=EventEnvelope.DATA;
         event.payload="backup";
-        messageService.sendEvent(event);
+        messageService.sendDbEvent(event);
     }
 }

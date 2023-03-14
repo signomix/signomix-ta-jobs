@@ -17,6 +17,6 @@ public class DataCleaner {
         EventEnvelope event=new EventEnvelope();
         event.type=EventEnvelope.DATA;
         event.payload="clean";
-        messageService.sendEvent(event);
+        messageService.sendDbEvent(event);
     }
 }
