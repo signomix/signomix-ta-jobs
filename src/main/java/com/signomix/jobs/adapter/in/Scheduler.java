@@ -11,6 +11,7 @@ import com.signomix.jobs.application.usecase.DataCleaner;
 import com.signomix.jobs.application.usecase.DeviceChecker;
 import com.signomix.jobs.application.usecase.EmailOnStart;
 import com.signomix.jobs.application.usecase.EmailOnStop;
+import com.signomix.jobs.application.usecase.SystemMonitor;
 
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
@@ -30,6 +31,8 @@ public class Scheduler {
     EmailOnStart emailOnStart;
     @Inject
     EmailOnStop emailOnStop;
+    @Inject
+    SystemMonitor systemMonitor;
 
     void onStart(@Observes StartupEvent ev) {               
         LOG.info("Scheduler is starting...");
@@ -54,5 +57,10 @@ public class Scheduler {
     @Scheduled(cron = "{cron.expr.checkdevices}") 
     void checkDevices() {
         deviceChecker.run();
+    }
+
+    @Scheduled(cron = "{cron.expr.systemmonitor}") 
+    void checkSystem() {
+        systemMonitor.run();
     }
 }
