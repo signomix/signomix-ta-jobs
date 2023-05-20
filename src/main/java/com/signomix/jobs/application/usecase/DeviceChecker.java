@@ -17,6 +17,6 @@ public class DeviceChecker {
         EventEnvelope event=new EventEnvelope();
         event.type=EventEnvelope.DEVICE;
         event.payload="check";
-        messageService.sendEvent(event);
+        messageService.sendDeviceEvent(event);
     }
 }

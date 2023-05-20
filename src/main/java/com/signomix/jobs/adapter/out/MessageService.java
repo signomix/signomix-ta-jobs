@@ -47,6 +47,19 @@ public class MessageService {
         }
     }
 
+    public void sendDeviceEvent(EventEnvelope wrapper) {
+        LOG.info("sending device event to MQ with payload "+wrapper.payload);
+        String encodedMessage;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            LOG.info("eventDeviceEmitter with payload "+wrapper.payload);
+            encodedMessage = objectMapper.writeValueAsString(wrapper);
+            eventDeviceEmitter.send(encodedMessage.getBytes());
+        } catch (JsonProcessingException ex) {
+            LOG.error(ex.getMessage());
+        }
+    }
+
     public void sendDbEvent(EventEnvelope wrapper) {
         String encodedMessage;
         ObjectMapper objectMapper = new ObjectMapper();
