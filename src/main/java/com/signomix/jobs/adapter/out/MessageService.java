@@ -1,7 +1,5 @@
 package com.signomix.jobs.adapter.out;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
@@ -13,7 +11,7 @@ import com.signomix.common.EventEnvelope;
 import com.signomix.common.MessageEnvelope;
 //import com.signomix.common.event.IotEvent;
 
-import io.quarkus.runtime.StartupEvent;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MessageService {

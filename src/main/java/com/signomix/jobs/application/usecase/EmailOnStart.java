@@ -1,12 +1,12 @@
 package com.signomix.jobs.application.usecase;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.signomix.common.EventEnvelope;
 import com.signomix.common.MessageEnvelope;
 import com.signomix.common.User;
 import com.signomix.jobs.adapter.out.MessageService;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class EmailOnStart {

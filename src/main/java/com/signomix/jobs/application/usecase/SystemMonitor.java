@@ -2,15 +2,14 @@ package com.signomix.jobs.application.usecase;
 
 import java.io.File;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
 import com.signomix.jobs.adapter.out.MessageService;
 
 import io.quarkus.logging.Log;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class SystemMonitor {
