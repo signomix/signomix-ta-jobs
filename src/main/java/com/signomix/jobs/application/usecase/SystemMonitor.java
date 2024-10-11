@@ -1,15 +1,11 @@
 package com.signomix.jobs.application.usecase;
 
-import java.io.File;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jboss.logging.Logger;
-
 import com.signomix.jobs.adapter.out.MessageService;
-
 import io.quarkus.logging.Log;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import java.io.File;
+import org.jboss.logging.Logger;
 
 @Singleton
 public class SystemMonitor {
@@ -17,8 +13,8 @@ public class SystemMonitor {
     @Inject
     MessageService messageService;
 
-    @ConfigProperty(name = "signomix.monitoring.disk.free")
-    long minimumFreeSpace;
+    //@ConfigProperty(name = "signomix.monitoring.disk.free")
+    long minimumFreeSpace=1000;
     
    /*  public void run(){
         System.out.println("Data backup");

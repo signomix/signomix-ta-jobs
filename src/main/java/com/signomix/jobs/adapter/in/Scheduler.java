@@ -5,6 +5,7 @@ import org.jboss.logging.Logger;
 
 import com.signomix.jobs.application.usecase.ArchiveRunner;
 import com.signomix.jobs.application.usecase.BackupRunner;
+import com.signomix.jobs.application.usecase.CommandRunner;
 import com.signomix.jobs.application.usecase.DataCleaner;
 import com.signomix.jobs.application.usecase.DeviceChecker;
 import com.signomix.jobs.application.usecase.EmailOnStart;
@@ -36,6 +37,8 @@ public class Scheduler {
     SystemMonitor systemMonitor;
     @Inject
     ArchiveRunner archiveRunner;
+    @Inject
+    CommandRunner commandRunner;
 
     void onStart(@Observes StartupEvent ev) {
         LOG.info("Scheduler is starting...");
@@ -71,5 +74,10 @@ public class Scheduler {
     @Scheduled(cron = "{cron.expr.systemmonitor}")
     void checkSystem() {
         systemMonitor.run();
+    }
+
+    @Scheduled(cron = "{cron.expr.devicecommands}")
+    void sendCommands() {
+        commandRunner.run();
     }
 }
