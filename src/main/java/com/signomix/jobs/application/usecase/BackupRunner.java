@@ -1,15 +1,16 @@
 package com.signomix.jobs.application.usecase;
 
 
-import com.signomix.common.EventEnvelope;
-import com.signomix.jobs.adapter.out.MessageService;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.jboss.logging.Logger;
 
 @Singleton
 public class BackupRunner {
-    @Inject
+    
+    /* @Inject
     MessageService messageService;
     
     public void run(){
@@ -18,5 +19,16 @@ public class BackupRunner {
         event.type=EventEnvelope.DATA;
         event.payload="backup";
         messageService.sendDbEvent(event);
+    } */
+
+    Logger logger = Logger.getLogger(BackupRunner.class);
+
+    @Inject
+    @Channel("commands")
+    Emitter<String> emitter;
+
+    public void run(){
+        logger.info("Backup data...");
+        emitter.send("backup");
     }
 }

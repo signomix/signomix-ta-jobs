@@ -1,10 +1,8 @@
 package com.signomix.jobs.application.usecase;
 
-import com.signomix.common.EventEnvelope;
 import com.signomix.common.MessageEnvelope;
 import com.signomix.common.User;
 import com.signomix.jobs.adapter.out.MessageService;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -23,10 +21,10 @@ public class EmailOnStart {
         envelope.subject="service is starting";
         messageService.sendAdminEmail(envelope);
 
-        EventEnvelope eventEnvelope = new EventEnvelope();
+/*         EventEnvelope eventEnvelope = new EventEnvelope();
         eventEnvelope.type=EventEnvelope.SYSTEM;
         eventEnvelope.payload="service is starting";
-        messageService.sendEvent(eventEnvelope);
+        messageService.sendEvent(eventEnvelope); */
         
     }
 }

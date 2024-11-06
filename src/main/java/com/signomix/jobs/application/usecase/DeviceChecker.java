@@ -1,15 +1,15 @@
 package com.signomix.jobs.application.usecase;
 
-import com.signomix.common.EventEnvelope;
-import com.signomix.jobs.adapter.out.MessageService;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.jboss.logging.Logger;
 
 @Singleton
 public class DeviceChecker {
 
-    @Inject
+    /* @Inject
     MessageService messageService;
     
     public void run(){
@@ -18,5 +18,16 @@ public class DeviceChecker {
         event.type=EventEnvelope.DEVICE;
         event.payload="check";
         messageService.sendDeviceEvent(event);
+    } */
+
+    Logger logger = Logger.getLogger(DeviceChecker.class);
+
+    @Inject
+    @Channel("commands")
+    Emitter<String> emitter;
+
+    public void run(){
+        logger.info("Check devices...");
+        emitter.send("check");
     }
 }

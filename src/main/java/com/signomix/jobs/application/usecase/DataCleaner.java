@@ -1,16 +1,16 @@
 package com.signomix.jobs.application.usecase;
 
 
-import com.signomix.common.EventEnvelope;
-import com.signomix.jobs.adapter.out.MessageService;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.jboss.logging.Logger;
 
 @Singleton
 public class DataCleaner {
 
-    @Inject
+    /* @Inject
     MessageService messageService;
     
     public void run(){
@@ -19,5 +19,16 @@ public class DataCleaner {
         event.type=EventEnvelope.DATA;
         event.payload="clean";
         messageService.sendDbEvent(event);
+    } */
+
+    Logger logger = Logger.getLogger(DataCleaner.class);
+
+    @Inject
+    @Channel("commands")
+    Emitter<String> emitter;
+
+    public void run(){
+        logger.info("Clean data...");
+        emitter.send("clean");
     }
 }

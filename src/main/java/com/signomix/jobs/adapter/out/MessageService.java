@@ -1,39 +1,35 @@
 package com.signomix.jobs.adapter.out;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.signomix.common.MessageEnvelope;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.jboss.logging.Logger;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.signomix.common.EventEnvelope;
-import com.signomix.common.MessageEnvelope;
-//import com.signomix.common.event.IotEvent;
-
-import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MessageService {
 
     private static final Logger LOG = Logger.getLogger(MessageService.class);
 
-    @Channel("events")
-    Emitter<byte[]> eventEmitter;
+    // @Channel("events")
+    // Emitter<byte[]> eventEmitter;
 
-    @Channel("events_db")
-    Emitter<byte[]> eventDbEmitter;
+    // @Channel("events_db")
+    // Emitter<byte[]> eventDbEmitter;
 
-    @Channel("events_device")
-    Emitter<byte[]> eventDeviceEmitter;
+    // @Channel("events_device")
+    // Emitter<byte[]> eventDeviceEmitter;
 
-    @Channel("notifications")
-    Emitter<byte[]> iotEventEmitter;
+    // @Channel("notifications")
+    // Emitter<byte[]> iotEventEmitter;
 
-    @Channel("admin_email")
+    @Channel("adminemail")
     Emitter<byte[]> adminEmailEmitter;
 
-    public void sendEvent(EventEnvelope wrapper) {
+/*     public void sendEvent(EventEnvelope wrapper) {
         LOG.info("sending event to MQ with payload "+wrapper.payload);
         String encodedMessage;
         ObjectMapper objectMapper = new ObjectMapper();
@@ -43,9 +39,9 @@ public class MessageService {
         } catch (JsonProcessingException ex) {
             LOG.error(ex.getMessage());
         }
-    }
+    } */
 
-    public void sendDeviceEvent(EventEnvelope wrapper) {
+/*     public void sendDeviceEvent(EventEnvelope wrapper) {
         LOG.info("sending device event to MQ with payload "+wrapper.payload);
         String encodedMessage;
         ObjectMapper objectMapper = new ObjectMapper();
@@ -56,9 +52,9 @@ public class MessageService {
         } catch (JsonProcessingException ex) {
             LOG.error(ex.getMessage());
         }
-    }
+    } */
 
-    public void sendDbEvent(EventEnvelope wrapper) {
+/*     public void sendDbEvent(EventEnvelope wrapper) {
         String encodedMessage;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -68,10 +64,10 @@ public class MessageService {
         } catch (JsonProcessingException ex) {
             LOG.error(ex.getMessage());
         }
-    }
+    } */
 
     public void sendAdminEmail(MessageEnvelope wrapper) {
-        LOG.info("sending admin e-mail to MQ");
+        LOG.info("sending admin e-mail to MQTT");
         String encodedMessage;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
