@@ -41,3 +41,4 @@ nb-configuration.xml
 attic/common/EventEnvelope.java
 attic/common/MessageEnvelope.java
 attic/common/User.java
+build-report.txt
